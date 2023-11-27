@@ -23,15 +23,18 @@
 </head>
 
 <body>
-  <div class="container">
+  <main>
+      <div class="container">
     <h1>Todo List</h1>
     <form id="todo-form">
-      <input type="text" id="todo-input" placeholder="Add a new task" required>
+      <input type="text" id="todo-input" placeholder="New Todo" required>
       <button type="submit">Add</button>
     </form>
-    <div id="todo-list"></div>
-    <button id="clear-completed">Clear Completed</button>
-  </div>
+    <ul id="todo-list"></ul>
+      <button id="clear-completed">Clear Completed</button>
+    </div>
+  </main>
+
 
   <script src="script.js"></script>
 </body>

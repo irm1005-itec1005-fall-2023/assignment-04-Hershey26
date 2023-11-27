@@ -57,8 +57,15 @@ button {
   overflow-y: auto;
 }
 
+ul{
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
 .todo-item {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   background-color: #ed6b6d;
   color: #E5FCFF;
@@ -69,6 +76,8 @@ button {
 
 .todo-item.completed {
   background-color: #4CAF50;
+  text-decoration: line-through;
+  color: #6b7475;
 }
 
 .todo-item button {
@@ -78,6 +87,14 @@ button {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+}
+
+.todo-item button:hover {
+  background-color: #3a3a3a;
+}
+
+button:hover {
+  background-color: #386855;
 }
 
 

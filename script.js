@@ -94,6 +94,8 @@ function renderTodoList() {
     if (item.completed) {
       todoItemDiv.classList.add("completed");
     }
+    // Create a div element for the buttons
+    const todoButtonDiv = document.createElement("div");
     // Create a span element
     const todoText = document.createElement("span");
     // Add the text of the todo item to the span
@@ -122,8 +124,9 @@ function renderTodoList() {
     });
     // Append the span and button to the div
     todoItemDiv.appendChild(todoText);
-    todoItemDiv.appendChild(deleteBtn);
-    todoItemDiv.appendChild(markCompletedBtn);
+    todoButtonDiv.appendChild(deleteBtn);
+    todoButtonDiv.appendChild(markCompletedBtn);
+    todoItemDiv.appendChild(todoButtonDiv);
     todoList.appendChild(todoItemDiv);
   });
 }
