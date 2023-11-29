@@ -106,12 +106,6 @@ body.dark-mode {
   transition: background-color 1s ease, color 0.5s ease;
 }
 
-.dark-mode .container {
-  /* Add your dark mode styles for .container here */
-  background-color: #c9c1c1;
-  color: #fff;
-}
-
 #dark-mode-button {
   background-color: #fff;
   color: #000;
