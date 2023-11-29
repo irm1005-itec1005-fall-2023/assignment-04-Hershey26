@@ -79,6 +79,34 @@ clearCompletedBtn.addEventListener("click", function () {
 function renderTodoList() {
   // Clear the list
   todoList.innerHTML = "";
+
+  // Check if the todo list is empty
+  if (todoItems.length === 0) {
+    // Create a new div, img, and p elements
+    var emptyDiv = document.createElement('div');
+    var emptyImage = document.createElement('img');
+
+    // Set the img src and p text
+    emptyImage.src = 'images/no-task.png'; // replace with your image URL
+
+    // Append the img and p to the div
+    emptyDiv.appendChild(emptyImage);
+    // Append the div to the todo list
+    todoList.appendChild(emptyDiv);
+  } 
+  else {
+    // Render the list
+    todoItems.forEach(function (item) {
+      // Create a div element
+      const todoItemDiv = document.createElement("div");
+      // Add the class todo-item to the div
+      todoItemDiv.classList.add("todo-item");
+      // Add the class completed to the div if the task is completed
+      if (item.completed) {
+        todoItemDiv.classList.add("completed");
+      }
+    });
+  }  
   // Render the list
   //.foreach is a function that is used to loop through the array
   //chatgpt helped me use it instead of a for loop
