@@ -6,7 +6,7 @@
 
 // Initialize an empty array with the variable name todoItems
 let todoItems = [];
-todoId = 0;
+let todoId = 0;
 // Function to add a todo to the list
 function addToDoItem(text) {
   let todoItem = {
@@ -18,22 +18,18 @@ function addToDoItem(text) {
   saveToLocalStorage();
 }
 
-// Function to remove a todo from the list
-function removeToDoItem(todoId) {
-  for (let i = 0; i < todoItems.length; i++) {
-    if (todoItems[i].id === todoId) {
-      todoItems.splice(i, 1);
-    }
-  }
-}
-
 // Function to mark a task as completed
 function markToDoItemAsCompleted(todoId) {
   for (let i = 0; i < todoItems.length; i++) {
+    // If the id of the todo item matches the id passed as a parameter
     if (todoItems[i].id === todoId) {
-      todoItems[i].completed = true;
+      // Toggle the completed status of the todo item
+      todoItems[i].completed = !todoItems[i].completed;
+      // Save the updated todo items to local storage
+      saveToLocalStorage();
+      // Return from the function
+      return;
     }
-    saveToLocalStorage();
   }
 }
 
@@ -42,8 +38,9 @@ function deleteToDoItem(todoId) {
   for (let i = 0; i < todoItems.length; i++) {
     if (todoItems[i].id === todoId) {
       todoItems.splice(i, 1);
+      saveToLocalStorage();
+      return;
     }
-    saveToLocalStorage();
   }
 }
 
@@ -119,9 +116,14 @@ function renderTodoList() {
     markCompletedBtn.addEventListener("click", function () {
       // Mark the todo item as completed
       markToDoItemAsCompleted(item.id);
+      // Toggle the class completed on the todoItemDiv
+      todoItemDiv.classList.toggle('completed');
       // Render the list
-      renderTodoList();
+        // Render the list after a delay
+        // chat gpt helped in doing this
+        setTimeout(renderTodoList, 1000);
     });
+
     // Append the span and button to the div
     todoItemDiv.appendChild(todoText);
     todoButtonDiv.appendChild(deleteBtn);
@@ -144,6 +146,37 @@ function loadFromLocalStorage() {
     todoItems = JSON.parse(todoItemsString);
   }
 }
+
+//chat gpt helped in making the dark mode button
+// set up dark mode
+const darkModeButton = document.getElementById("dark-mode-button");
+
+// Check for saved 'darkMode' in localStorage
+const savedDarkMode = localStorage.getItem('darkMode');
+// If the user's preference is dark, set the dark-mode class
+if (savedDarkMode === 'dark') {
+  // add the class dark-mode to the body
+  document.body.classList.add('dark-mode');
+  // update darkModeButton text
+  darkModeButton.textContent = 'Light Mode';
+} else {
+  // update darkModeButton text
+  darkModeButton.textContent = 'Dark Mode';
+}
+
+// Listen for a click on the button
+darkModeButton.addEventListener("click", function () {
+  // Toggle the .dark-mode class on each click
+  document.body.classList.toggle('dark-mode');
+  
+  // Save the current mode to localStorage
+  let currentMode = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
+  localStorage.setItem('darkMode', currentMode);
+
+  // Change button text
+  darkModeButton.textContent = currentMode === 'dark' ? 'Light Mode' : 'Dark Mode';
+});
+
 // Load the todo items from local storage
 //from chat gpt
 loadFromLocalStorage();
